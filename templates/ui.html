@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and Comment Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 5% 5% 5% 25%;
+            padding: 0;
+            display: absolute;
+            align: center;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+
+        .form-group input[type="file"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .form-group button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .preview-container {
+            margin-top: 20px;
+        }
+
+        #previewImage {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 1s;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>SAST with GenAi</h1>
+        <form action="/scan" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fileInput">Choose a file:</label>
+                <input type="file" name='file' id="fileInput" accept="image/*"><br>
+            </div>
+
+            <div class="preview-container" id="previewContainer" style="display: none;">
+                <h2>Image Preview</h2>
+                <img id="previewImage" alt="Image Preview">
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Your Prompt:</label>
+                <textarea id="comment" name="comment" rows="4" style="height:260px"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('previewImage').src = e.target.result;
+                        document.getElementById('previewContainer').style.display = 'block';
+
+                        setTimeout(() => {
+                            document.getElementById('previewImage').style.opacity = 1;
+                            document.getElementById('previewImage').style.display = 'flex';
+                            document.getElementById('container').style.maxWidth = '85%';
+                            document.querySelector('body').style.margin = '5% 5% 5% 15%';
+                        }, 1000); // 1-second delay for the transition
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form with Image Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+
+        .form-group input[type="file"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .form-group button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        img {
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+            transition: opacity 2s;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Upload Your File and Comment</h1>
+        <form id="uploadForm">
+            <label for="fileInput">Select an image file:</label>
+            <input type="file" id="fileInput" accept="image/*" required><br><br>
+
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Add your comment here..."></textarea><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        
+        <div class="preview-container" id="previewContainer" style="display: none;">
+            <h2>Image Preview</h2>
+            <img id="previewImage" src="#" alt="Image Preview">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
